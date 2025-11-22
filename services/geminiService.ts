@@ -21,7 +21,9 @@ export const describeImage = async (base64Image: string): Promise<string> => {
     ],
   };
 
-  const response = await fetch("http://localhost:5001/api/gemini", {
+  // Use deployed backend URL or fallback to localhost for development
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5001";
+  const response = await fetch(`${API_BASE_URL}/api/gemini`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
