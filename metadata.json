@@ -1,0 +1,8 @@
+
+{
+  "name": "AI Vision Assistant",
+  "description": "An application that uses the device camera and AI to describe the surroundings in real-time for visually impaired users.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
