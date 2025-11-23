@@ -29,8 +29,16 @@ export const describeImage = async (base64Image: string): Promise<string> => {
     body: JSON.stringify(body),
   });
 
+  // Check if response is actually JSON
+  const contentType = response.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    const text = await response.text();
+    console.error("Non-JSON response received:", text.substring(0, 200));
+    throw new Error(`Server returned ${response.status}: ${response.statusText}. Check backend URL and CORS settings.`);
+  }
+
   if (!response.ok) {
-    const error = await response.json();
+    const error = await response.json().catch(() => ({ error: { message: `HTTP ${response.status}: ${response.statusText}` } }));
     throw new Error(error.error?.message || "Failed to get description from AI");
   }
 

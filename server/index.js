@@ -6,18 +6,14 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Update CORS to allow all origins (or specify your Vercel domain)
+// CORS configuration - allow all origins for now (you can restrict this later)
 app.use(cors({
-  origin: '*',  // Allow all origins, or use your specific Vercel URL
+  origin: '*',
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: false
 }));
-
 app.use(express.json({ limit: '10mb' }));
-
-// Add OPTIONS handler for preflight requests
-app.options('*', cors());
 
 app.post('/api/gemini', async (req, res) => {
   const apiKey = process.env.VITE_GEMINI_API_KEY;
