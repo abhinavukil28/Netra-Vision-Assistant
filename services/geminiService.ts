@@ -22,7 +22,7 @@ export const describeImage = async (base64Image: string): Promise<string> => {
   };
 
   // Use deployed backend URL or fallback to localhost for development
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://netra-vision-assistant-production.up.railway.app";
+  const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "https://netra-vision-assistant-production.up.railway.app").replace(/\/$/, ''); // Remove trailing slash
   const apiUrl = `${API_BASE_URL}/api/gemini`;
   
   console.log('Calling API:', apiUrl); // Debug log
