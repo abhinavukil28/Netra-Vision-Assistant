@@ -15,6 +15,11 @@ app.use(cors({
 }));
 app.use(express.json({ limit: '10mb' }));
 
+// Add a root route for debugging
+app.get('/', (req, res) => {
+  res.json({ message: 'Gemini Proxy Server is running', endpoints: ['/api/gemini', '/health'] });
+});
+
 app.post('/api/gemini', async (req, res) => {
   const apiKey = process.env.VITE_GEMINI_API_KEY;
   if (!apiKey) {

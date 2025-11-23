@@ -23,7 +23,11 @@ export const describeImage = async (base64Image: string): Promise<string> => {
 
   // Use deployed backend URL or fallback to localhost for development
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://netra-vision-assistant-production.up.railway.app";
-  const response = await fetch(`${API_BASE_URL}/api/gemini`, {
+  const apiUrl = `${API_BASE_URL}/api/gemini`;
+  
+  console.log('Calling API:', apiUrl); // Debug log
+  
+  const response = await fetch(apiUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
